@@ -44,3 +44,81 @@ ignore-paths = [
 
 [tool.pylint.FORMAT]
 max-module-lines = 2000
+
+# Ruff configuration - linting only (no formatting yet)
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+# Exclude vendored/generated code (matches Pylint ignore-paths)
+extend-exclude = [
+    "mace/tools/torch_geometric",
+    "mace/tools/scatter.py",
+]
+
+[tool.ruff.lint]
+select = [
+    # Enable rule categories:
+    "F", # Pyflakes (undefined names, unused imports, etc.)
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "I", # isort (import sorting)
+    "B", # flake8-bugbear (common mistakes)
+    "UP", # pyupgrade (modern Python syntax)
+    "PL", # Pylint (all Pylint rules)
+    "C4", # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "PT", # flake8-pytest-style
+    "NPY", # NumPy-specific rules
+]
+
+# Disable rules that match Pylint's disabled rules
+ignore = [
+    # Pylint: line-too-long (handled by formatter)
+    "E501",
+    # Pylint: no-member (E1101) - false positives with dynamic attributes
+    "PLE1101",
+    # Pylint: missing docstrings (C0114, C0115, C0116)
+    # Note: D rules not enabled, but listing for documentation
+
+    # Pylint: too-many-arguments (R0913)
+    "PLR0913",
+    # Pylint: too-many-positional-arguments (R0917) - new in Pylint
+    "PLR0917",
+    # Pylint: too-many-locals (R0914)
+    "PLR0914",
+    # Pylint: too-many-return-statements (R0911)
+    "PLR0911",
+    # Pylint: not-callable (E1102) - false positives
+    "PLE1102",
+    # Pylint: logging-fstring-interpolation (W1203)
+    # Ruff equivalent would be in G rules (flake8-logging-format), not enabled
+
+    # Pylint: invalid-name (C0103) - allow flexible naming
+    "N801", "N802", "N803", "N806", "N815", "N816",
+    # Pylint: too-few-public-methods (R0903)
+    "PLR0903",
+    # Pylint: too-many-instance-attributes (R0902)
+    "PLR0902",
+    # Pylint: too-many-statements (R0915)
+    "PLR0915",
+    # Pylint: too-many-branches (R0912)
+    "PLR0912",
+    # Pylint: import-outside-toplevel (C0415)
+    "PLC0415",
+    # Pylint: cell-var-from-loop (W0640)
+    "B023",
+    # Pylint: use-dict-literal (R1735)
+    "UP018",
+    # Pylint: duplicate-code (R0801) - no Ruff equivalent
+]
+
+[tool.ruff.lint.pylint]
+max-args = 999  # Effectively unlimited (disabled via PLR0913)
+max-branches = 999  # Effectively unlimited (disabled via PLR0912)
+max-returns = 999  # Effectively unlimited (disabled via PLR0911)
+max-statements = 999  # Effectively unlimited (disabled via PLR0915)
+
+[tool.ruff.lint.isort]
+# Match current isort config (black-compatible)
+profile = "black"
