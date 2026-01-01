@@ -112,6 +112,7 @@ def test_run_train(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -183,6 +184,7 @@ def test_run_train_missing_data(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -253,6 +255,7 @@ def test_run_train_no_stress(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -352,6 +355,7 @@ def test_run_train_multihead(tmp_path, fitting_configs):
 
     mace_params = _mace_params.copy()
     mace_params["valid_fraction"] = 0.1
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["loss"] = "weighted"
@@ -431,6 +435,7 @@ def test_run_train_foundation(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -538,6 +543,7 @@ def test_run_train_foundation_multihead(tmp_path, fitting_configs):
         file.write(yaml_str)
     mace_params = _mace_params.copy()
     mace_params["valid_fraction"] = 0.1
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["config"] = tmp_path / "config.yaml"
@@ -675,6 +681,7 @@ def test_run_train_foundation_multihead_json(tmp_path, fitting_configs):
         file.write(yaml_str)
     mace_params = _mace_params.copy()
     mace_params["valid_fraction"] = 0.1
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["config"] = tmp_path / "config.yaml"
@@ -860,6 +867,7 @@ def test_run_train_multihead_replay_custom_finetuning(
         "seed": 42,
         "loss": "weighted",
         "default_dtype": "float64",
+        "work_dir": str(tmp_path),
         "checkpoints_dir": str(tmp_path),
         "model_dir": str(tmp_path),
         "foundation_model": os.path.join(tmp_path, "foundation.model"),
@@ -907,6 +915,7 @@ def test_run_train_cueq(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -1035,6 +1044,7 @@ def test_run_train_foundation_multihead_json_cueq(tmp_path, fitting_configs):
         file.write(yaml_str)
     mace_params = _mace_params.copy()
     mace_params["valid_fraction"] = 0.1
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["config"] = tmp_path / "config.yaml"
@@ -1133,6 +1143,7 @@ def test_run_train_lbfgs(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -1203,6 +1214,7 @@ def test_run_train_foundation_elements(tmp_path, fitting_configs):
 
     base_params = {
         "name": "MACE",
+        "work_dir": str(tmp_path),
         "checkpoints_dir": str(tmp_path),
         "model_dir": str(tmp_path),
         "train_file": tmp_path / "fit.xyz",
@@ -1342,6 +1354,7 @@ def test_run_train_foundation_elements_multihead(tmp_path, fitting_configs):
 
     base_params = {
         "name": "MACE",
+        "work_dir": str(tmp_path),
         "checkpoints_dir": str(tmp_path),
         "model_dir": str(tmp_path),
         "config": str(config_file),
@@ -1499,6 +1512,7 @@ def test_run_train_foundation_multihead_pseudolabeling(tmp_path, fitting_configs
         file.write(yaml_str)
     mace_params = _mace_params.copy()
     mace_params["valid_fraction"] = 0.1
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["config"] = tmp_path / "config.yaml"
@@ -1914,6 +1928,7 @@ def test_run_train_omol_foundation(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
@@ -1958,6 +1973,7 @@ def test_run_train_mh_foundation(tmp_path, fitting_configs):
     ase.io.write(tmp_path / "fit.xyz", fitting_configs)
 
     mace_params = _mace_params.copy()
+    mace_params["work_dir"] = str(tmp_path)
     mace_params["checkpoints_dir"] = str(tmp_path)
     mace_params["model_dir"] = str(tmp_path)
     mace_params["train_file"] = tmp_path / "fit.xyz"
