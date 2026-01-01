@@ -18,6 +18,8 @@ from mace.modules import (
 from mace.tools import AtomicNumberTable, scatter, to_numpy, torch_geometric
 from mace.tools.scripts_utils import dict_to_array
 
+pytestmark = pytest.mark.unit
+
 
 @pytest.fixture(name="config")
 def _config():

@@ -11,6 +11,8 @@ from ase.atoms import Atoms
 
 from mace.calculators import MACECalculator
 
+pytestmark = pytest.mark.integration
+
 try:
     import cuequivariance as cue  # pylint: disable=unused-import
 
@@ -141,7 +143,7 @@ def test_run_train_freeze(tmp_path, fitting_configs):
             ]
         )
     )
-    
+
     print(f"Running command: {cmd}")
     p = subprocess.run(cmd.split(), env=run_env, check=True)
     assert p.returncode == 0
@@ -200,7 +202,9 @@ def test_run_train_soft_freeze(tmp_path, fitting_configs):
     mace_params["num_radial_basis"] = 10
     mace_params["interaction_first"] = "RealAgnosticResidualInteractionBlock"
     mace_params["multiheads_finetuning"] = False
-    mace_params["lr_params_factors"] = '{"embedding_lr_factor": 0.0, "interactions_lr_factor": 1.0, "products_lr_factor": 1.0, "readouts_lr_factor": 1.0}'
+    mace_params["lr_params_factors"] = (
+        '{"embedding_lr_factor": 0.0, "interactions_lr_factor": 1.0, "products_lr_factor": 1.0, "readouts_lr_factor": 1.0}'
+    )
 
     run_env = os.environ.copy()
     sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -212,7 +216,7 @@ def test_run_train_soft_freeze(tmp_path, fitting_configs):
             cmd.append(f"--{k}={v}")
         else:
             cmd.append(f"--{k}")
-    
+
     print(f"Running command: {cmd}")
     p = subprocess.run(cmd, env=run_env, check=True)
     assert p.returncode == 0
@@ -254,4 +258,3 @@ def test_run_train_soft_freeze(tmp_path, fitting_configs):
     ]
 
     assert np.allclose(Es, ref_Es)
-

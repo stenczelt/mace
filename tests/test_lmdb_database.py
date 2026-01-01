@@ -2,6 +2,7 @@ import os
 import tempfile
 
 import numpy as np
+import pytest
 import torch
 from ase.build import molecule
 from ase.calculators.singlepoint import SinglePointCalculator
@@ -9,6 +10,8 @@ from ase.calculators.singlepoint import SinglePointCalculator
 from mace.data.lmdb_dataset import LMDBDataset
 from mace.tools import AtomicNumberTable, torch_geometric
 from mace.tools.fairchem_dataset.lmdb_dataset_tools import LMDBDatabase
+
+pytestmark = pytest.mark.integration
 
 
 def test_lmdb_dataset():

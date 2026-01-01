@@ -16,6 +16,8 @@ from mace.tools.finetuning_utils import load_foundations_elements
 from mace.tools.scripts_utils import extract_config_mace_model, remove_pt_head
 from mace.tools.utils import AtomicNumberTable
 
+pytestmark = pytest.mark.integration
+
 MODEL_PATH = (
     Path(__file__).parent.parent
     / "mace"

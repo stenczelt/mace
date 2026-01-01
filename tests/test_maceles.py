@@ -19,6 +19,8 @@ from mace.modules.models import ScaleShiftMACE
 from mace.tools.arg_parser import build_default_arg_parser
 from mace.tools.torch_tools import default_dtype
 
+pytestmark = pytest.mark.integration
+
 LES_AVAILABLE = bool((spec := importlib.util.find_spec("les")) is not None)
 CUET_AVAILABLE = bool((spec := importlib.util.find_spec("cuequivariance")) is not None)
 CUDA_AVAILABLE = torch.cuda.is_available()

@@ -17,6 +17,8 @@ from mace.data import (
 )
 from mace.tools import AtomicNumberTable, torch_geometric
 
+pytestmark = pytest.mark.unit
+
 mace_path = Path(__file__).parent.parent
 
 

@@ -13,6 +13,8 @@ from mace.data import Configuration
 from mace.tools import torch_geometric
 from mace.tools.lora_tools import inject_lora
 
+pytestmark = pytest.mark.integration
+
 
 def _random_config() -> Configuration:
     atomic_numbers = np.array([6, 1, 1], dtype=int)

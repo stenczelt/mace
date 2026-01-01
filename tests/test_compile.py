@@ -14,6 +14,8 @@ from mace.modules.wrapper_ops import CuEquivarianceConfig
 from mace.tools import compile as mace_compile
 from mace.tools import torch_geometric
 
+pytestmark = pytest.mark.integration
+
 table = tools.AtomicNumberTable([6])
 atomic_energies = np.array([1.0], dtype=float)
 cutoff = 5.0

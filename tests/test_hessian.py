@@ -4,6 +4,8 @@ from ase.build import fcc111
 
 from mace.calculators import mace_mp
 
+pytestmark = pytest.mark.integration
+
 
 @pytest.fixture(name="setup_calculator_")
 def setup_calculator():

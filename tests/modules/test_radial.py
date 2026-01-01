@@ -3,6 +3,8 @@ import torch
 
 from mace.modules.radial import AgnesiTransform, ZBLBasis
 
+pytestmark = pytest.mark.unit
+
 
 @pytest.fixture
 def zbl_basis():

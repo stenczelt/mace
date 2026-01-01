@@ -17,6 +17,8 @@ from mace.calculators.foundations_models import mace_omol
 from mace.calculators.mace import MACECalculator
 from mace.modules.models import ScaleShiftMACE
 
+pytestmark = pytest.mark.integration
+
 try:
     import cuequivariance as cue  # pylint: disable=unused-import
 

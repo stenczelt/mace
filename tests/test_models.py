@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 import torch
 import torch.nn.functional
 from ase import build
@@ -8,6 +9,8 @@ from scipy.spatial.transform import Rotation as R
 
 from mace import data, modules, tools
 from mace.tools import torch_geometric
+
+pytestmark = pytest.mark.unit
 
 torch.set_default_dtype(torch.float64)
 config = data.Configuration(

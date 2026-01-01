@@ -13,6 +13,8 @@ from ase.calculators.singlepoint import SinglePointCalculator
 
 from mace.calculators import MACECalculator, mace_mp
 
+pytestmark = [pytest.mark.integration, pytest.mark.slow]
+
 try:
     import cuequivariance as cue  # pylint: disable=unused-import
 

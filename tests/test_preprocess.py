@@ -9,6 +9,8 @@ import pytest
 import yaml
 from ase.atoms import Atoms
 
+pytestmark = pytest.mark.integration
+
 pytest_mace_dir = Path(__file__).parent.parent
 preprocess_data = Path(__file__).parent.parent / "mace" / "cli" / "preprocess_data.py"
 

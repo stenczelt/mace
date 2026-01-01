@@ -10,6 +10,8 @@ from e3nn import o3
 from mace import data, modules, tools
 from mace.tools import scripts_utils, torch_geometric
 
+pytestmark = pytest.mark.integration
+
 try:
     import schedulefree
 except ImportError:

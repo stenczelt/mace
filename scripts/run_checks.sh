@@ -5,5 +5,5 @@ python -m isort .
 # Check
 python -m pylint --rcfile=pyproject.toml mace tests scripts
 
-# Tests
-python -m pytest tests
+# Tests (excluding slow tests for faster checks)
+python -m pytest -m "not slow" tests

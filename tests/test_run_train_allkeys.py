@@ -14,6 +14,8 @@ from mace.cli.run_train import run as run_mace_train
 from mace.data.utils import KeySpecification
 from mace.tools import build_default_arg_parser
 
+pytestmark = pytest.mark.integration
+
 run_train = Path(__file__).parent.parent / "mace" / "cli" / "run_train.py"
 
 

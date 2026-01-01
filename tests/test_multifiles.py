@@ -18,6 +18,8 @@ from ase.calculators.singlepoint import SinglePointCalculator
 
 from mace.calculators import MACECalculator
 
+pytestmark = [pytest.mark.integration, pytest.mark.slow]
+
 
 def create_test_atoms(num_atoms=5, seed=42):
     """Create random atoms for testing purposes with energy, forces, and stress."""

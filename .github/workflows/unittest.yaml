@@ -5,7 +5,31 @@ on:
     branches: [main, development]
 
 jobs:
-  pytest-general:
+  pytest-unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install requirements
+        run: |
+          pip install -U pip
+          pip install .[dev]
+
+      - name: Run unit tests only (fast)
+        run: |
+          pytest -m unit tests
+
+  pytest-integration:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,18 +44,40 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
-      - name: Install requirements (general tests)
+      - name: Install requirements (integration tests)
         run: |
           pip install -U pip
           pip install .[dev]
 
-      - name: Log installed environment (general tests)
+      - name: Log installed environment (integration tests)
         run: |
           python3 -m pip freeze
 
-      - name: Run general unit tests
+      - name: Run unit and integration tests (excluding slow and cueq)
         run: |
-          pytest tests --ignore=tests/test_cueq_oeq.py
+          pytest -m "not slow" tests --ignore=tests/test_cueq_oeq.py
+
+  pytest-slow:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install requirements
+        run: |
+          pip install -U pip
+          pip install .[dev]
+
+      - name: Run slow tests only
+        run: |
+          pytest -m slow tests --ignore=tests/test_cueq_oeq.py
 
   pytest-cueq:
     runs-on: ubuntu-latest

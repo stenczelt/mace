@@ -1,6 +1,9 @@
+import pytest
 from e3nn import o3
 
 from mace.tools import cg
+
+pytestmark = pytest.mark.unit
 
 
 def test_U_matrix():

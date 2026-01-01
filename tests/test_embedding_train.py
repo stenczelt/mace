@@ -4,10 +4,13 @@ import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 from ase import Atoms
 from ase.build import molecule
 
 from mace.calculators import MACECalculator
+
+pytestmark = pytest.mark.integration
 
 
 def test_run_train_with_elec_temp(tmp_path):

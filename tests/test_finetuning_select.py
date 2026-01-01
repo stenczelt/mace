@@ -15,6 +15,8 @@ from mace.cli.fine_tuning_select import (
     select_samples,
 )
 
+pytestmark = pytest.mark.integration
+
 
 @pytest.fixture(name="train_atoms_fixture")
 def train_atoms():

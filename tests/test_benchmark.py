@@ -12,6 +12,8 @@ from mace import data as mace_data
 from mace.calculators.foundations_models import mace_mp
 from mace.tools import AtomicNumberTable, torch_geometric, torch_tools
 
+pytestmark = pytest.mark.benchmark
+
 
 def is_mace_full_bench():
     return os.environ.get("MACE_FULL_BENCH", "0") == "1"

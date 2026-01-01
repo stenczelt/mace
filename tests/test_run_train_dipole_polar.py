@@ -10,6 +10,8 @@ from ase.atoms import Atoms
 
 from mace.calculators import MACECalculator
 
+pytestmark = pytest.mark.integration
+
 try:
     import cuequivariance as cue  # pylint: disable=unused-import
 
