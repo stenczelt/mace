@@ -27,11 +27,12 @@ jobs:
           pip install -U pip
           pip install .[dev]
 
-      - name: Show available disk space
-        run: |
-          df -h
-
-      - name: Aggressive cleanup
+      # Some tests are creating large files that may persist until the end of the test
+      # run, so we are making more space available on the machine by deleting libraries
+      # and frameworks not relevant to us.
+      - name: Show available disk space (originally)
+        run: df -h
+      - name: Free up disk space
         run: |
           # Remove Java (JDKs)
           sudo rm -rf /usr/lib/jvm
@@ -51,10 +52,8 @@ jobs:
           # Remove web browsers
           sudo rm -rf /usr/local/share/chromium
           sudo rm -rf /opt/microsoft /opt/google
-
-      - name: Show available disk space
-        run: |
-          df -h
+      - name: Show available disk space (before tests)
+        run: df -h
 
       - name: Log installed environment (general tests)
         run: |
